@@ -29,9 +29,12 @@ const App = () => {
 
   // Save todoLists to localStorage whenever they change
   useEffect(() => {
-    localStorage.setItem("todoLists", JSON.stringify(todoLists));
-    console.log(JSON.parse(localStorage.getItem("todoLists") || ""));
+    saveLists();
   }, [todoLists]);
+
+  const saveLists = () => {
+    localStorage.setItem("todoLists", JSON.stringify(todoLists));
+  };
 
   const handleCreateList = (newList: UserTodoList) => {
     setTodoLists([...todoLists, newList]);
@@ -70,7 +73,7 @@ const App = () => {
               setIsSideBarOpen={setIsSideBarOpen}
             />
             {selectedTodo.id !== "" ? (
-              <TodoList selectedTodo={selectedTodo} />
+              <TodoList selectedTodo={selectedTodo} saveLists={saveLists}/>
             ) : (
               <CreateList onCreate={handleCreateList} />
             )}

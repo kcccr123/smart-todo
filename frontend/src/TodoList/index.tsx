@@ -19,7 +19,13 @@ import TodoListOptionsBar from "./TodoListOptionsBar";
 import InfoBlock from "./InfoBlock";
 import { Task, UserTodoList } from "./types";
 
-const TodoList = ({ selectedTodo }: { selectedTodo: UserTodoList }) => {
+const TodoList = ({
+  selectedTodo,
+  saveLists,
+}: {
+  selectedTodo: UserTodoList;
+  saveLists: () => void;
+}) => {
   const theme = useTheme();
   const [refresh, setRefresh] = useState<number>(0);
 
@@ -32,6 +38,7 @@ const TodoList = ({ selectedTodo }: { selectedTodo: UserTodoList }) => {
     };
     selectedTodo.todos.push(newTask);
     setRefresh((prev) => prev + 1); // Trigger re-render
+    saveLists();
   };
 
   const renderListItems = () => {
@@ -49,6 +56,7 @@ const TodoList = ({ selectedTodo }: { selectedTodo: UserTodoList }) => {
               if (taskToUpdate) {
                 taskToUpdate.completed = true;
                 setRefresh((prev) => prev + 1); // Trigger re-render
+                saveLists();
               }
             }}
           >
@@ -72,6 +80,7 @@ const TodoList = ({ selectedTodo }: { selectedTodo: UserTodoList }) => {
                 (t) => t.id !== task.id
               );
               setRefresh((prev) => prev + 1); // Trigger re-render
+              saveLists();
             }}
           >
             <DeleteIcon
@@ -105,6 +114,7 @@ const TodoList = ({ selectedTodo }: { selectedTodo: UserTodoList }) => {
               if (taskToUpdate) {
                 taskToUpdate.completed = false;
                 setRefresh((prev) => prev + 1); // Trigger re-render
+                saveLists();
               }
             }}
           >
@@ -128,6 +138,7 @@ const TodoList = ({ selectedTodo }: { selectedTodo: UserTodoList }) => {
                 (t) => t.id !== task.id
               );
               setRefresh((prev) => prev + 1); // Trigger re-render
+              saveLists();
             }}
           >
             <DeleteIcon
