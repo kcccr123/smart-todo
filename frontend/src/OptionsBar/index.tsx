@@ -35,7 +35,7 @@ const OptionsBar = ({
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" style={{ flexGrow: 1 }}>
-          Smart Notes
+          Quick Todo
         </Typography>
       </Toolbar>
     </AppBar>

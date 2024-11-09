@@ -66,8 +66,8 @@ const TodoList = ({
                 "&:hover": {
                   color: theme.palette.success.main,
                 },
-              }}
-            />
+              }}      
+            />      
           </IconButton>
           <ListItemIcon></ListItemIcon>
           <ListItemText primary={task.title} secondary={task.desc} />
