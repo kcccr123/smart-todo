@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import App from "./App"; // Main app component
-import LoginPage from "./LoginPage/LoginPage"; // Login page component
+import App from "../App"; // Main app component
+import LoginPage from "./LoginPage"; // Login page component
 
 // Define the onLogin handler function
 const handleLogin = () => {
   console.log("User logged in successfully!");
-  // Add any additional logic if needed (e.g., navigation)
+  // Add any additional actions upon successful login, e.g., navigate to another route
 };
 
 ReactDOM.render(
@@ -26,3 +26,4 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
+export { default } from "./LoginPage";
