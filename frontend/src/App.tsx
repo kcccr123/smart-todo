@@ -17,7 +17,9 @@ const App = () => {
   const [isSidebarOpen, setIsSideBarOpen] = useState(false);
   const [todoLists, setTodoLists] = useState<UserTodoList[]>(() => {
     try {
-      return JSON.parse(localStorage.getItem("todoLists") || "[]") as UserTodoList[];
+      return JSON.parse(
+        localStorage.getItem("todoLists") || "[]"
+      ) as UserTodoList[];
     } catch {
       return [];
     }
@@ -25,8 +27,12 @@ const App = () => {
 
   const [selectedTodo, setSelectedTodo] = useState<UserTodoList>(() => {
     try {
-      const savedLists = JSON.parse(localStorage.getItem("todoLists") || "[]") as UserTodoList[];
-      return savedLists[0] || { id: "", name: "", desc: "", created: "", todos: [] };
+      const savedLists = JSON.parse(
+        localStorage.getItem("todoLists") || "[]"
+      ) as UserTodoList[];
+      return (
+        savedLists[0] || { id: "", name: "", desc: "", created: "", todos: [] }
+      );
     } catch {
       return { id: "", name: "", desc: "", created: "", todos: [] };
     }
@@ -105,7 +111,10 @@ const App = () => {
                     setIsSideBarOpen={setIsSideBarOpen}
                   />
                   {selectedTodo.id !== "" ? (
-                    <TodoList selectedTodo={selectedTodo} saveLists={saveLists} />
+                    <TodoList
+                      selectedTodo={selectedTodo}
+                      saveLists={saveLists}
+                    />
                   ) : (
                     <CreateList onCreate={handleCreateList} />
                   )}
