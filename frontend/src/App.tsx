@@ -7,7 +7,7 @@ import TodoList from "./TodoList";
 import { lightModeTheme } from "./theme";
 import { UserTodoList } from "./TodoList/types";
 import CreateList from "./CreateList";
-import LoginPage from "./LoginPage/LoginPage"; 
+import LoginPage from "./LoginPage"; 
 
 const App = () => {
   const [isSidebarOpen, setIsSideBarOpen] = useState(false);
