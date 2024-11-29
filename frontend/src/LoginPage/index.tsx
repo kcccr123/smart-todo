@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const LoginPage = ({ onLogin }: { onLogin: () => void }) => {
+const LoginPage = ({
+  onLogin,
+  onBackToMain,
+}: {
+  onLogin: () => void;
+  onBackToMain: () => void;
+}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -15,11 +20,6 @@ const LoginPage = ({ onLogin }: { onLogin: () => void }) => {
     } else {
       alert("Invalid email or password");
     }
-  };
-
-  const handleBack = () => {
-    // Navigate back to the main page (or a default route)
-    navigate("/app"); // Replace "/app" with the route to the main page
   };
 
   return (
@@ -34,31 +34,22 @@ const LoginPage = ({ onLogin }: { onLogin: () => void }) => {
     >
       <form
         onSubmit={handleLogin}
-        style={{
-          width: "300px",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
+        style={{ width: "300px", display: "flex", flexDirection: "column" }}
       >
         <h2>Login</h2>
-        <label style={{ alignSelf: "flex-start", marginBottom: "4px" }}>
-          Email:
-        </label>
+        <label>Email:</label>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          style={{ padding: "8px", marginBottom: "10px", width: "100%" }}
+          style={{ padding: "8px", marginBottom: "10px" }}
         />
-        <label style={{ alignSelf: "flex-start", marginBottom: "4px" }}>
-          Password:
-        </label>
+        <label>Password:</label>
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          style={{ padding: "8px", marginBottom: "10px", width: "100%" }}
+          style={{ padding: "8px", marginBottom: "10px" }}
         />
         <button
           type="submit"
@@ -68,25 +59,22 @@ const LoginPage = ({ onLogin }: { onLogin: () => void }) => {
             color: "#fff",
             border: "none",
             marginBottom: "10px",
-            width: "100%",
           }}
         >
           Login
         </button>
       </form>
-      {/* Back Button */}
       <button
-        onClick={handleBack}
+        onClick={onBackToMain}
         style={{
           padding: "10px",
-          background: "gray",
+          background: "#007BFF",
           color: "#fff",
           border: "none",
-          width: "300px",
           marginTop: "10px",
         }}
       >
-        Back to Main Page
+        Return to Main Page
       </button>
     </div>
   );

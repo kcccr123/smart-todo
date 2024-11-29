@@ -50,15 +50,21 @@ const App = () => {
     navigate("/app"); // Navigate to the main app after login
   };
 
+  const handleBackToMain = () => {
+    setIsLoggedIn(true);
+    navigate("/app"); // Navigate to the main app directly
+  };
+
   return (
     <ThemeProvider theme={lightModeTheme}>
       <CssBaseline />
       <Routes>
         {!isLoggedIn ? (
-          // Render LoginPage when not logged in
-          <Route path="*" element={<LoginPage onLogin={handleLogin} />} />
+          <Route
+            path="*"
+            element={<LoginPage onLogin={handleLogin} onBackToMain={handleBackToMain} />}
+          />
         ) : (
-          // Render the main app after login
           <Route
             path="*"
             element={
