@@ -9,12 +9,15 @@ import { lightModeTheme } from "./theme";
 import { UserTodoList } from "./TodoList/types";
 import CreateList from "./CreateList";
 import LoginPage from "./LoginPage";
+import RegisterPage from "./RegisterPage";
 
 const App = () => {
   const [isSidebarOpen, setIsSideBarOpen] = useState(false);
   const [todoLists, setTodoLists] = useState<UserTodoList[]>(() => {
     try {
-      return JSON.parse(localStorage.getItem("todoLists") || "[]") as UserTodoList[];
+      return JSON.parse(
+        localStorage.getItem("todoLists") || "[]"
+      ) as UserTodoList[];
     } catch {
       return [];
     }
@@ -22,8 +25,12 @@ const App = () => {
 
   const [selectedTodo, setSelectedTodo] = useState<UserTodoList>(() => {
     try {
-      const savedLists = JSON.parse(localStorage.getItem("todoLists") || "[]") as UserTodoList[];
-      return savedLists[0] || { id: "", name: "", desc: "", created: "", todos: [] };
+      const savedLists = JSON.parse(
+        localStorage.getItem("todoLists") || "[]"
+      ) as UserTodoList[];
+      return (
+        savedLists[0] || { id: "", name: "", desc: "", created: "", todos: [] }
+      );
     } catch {
       return { id: "", name: "", desc: "", created: "", todos: [] };
     }
@@ -62,7 +69,12 @@ const App = () => {
         {!isLoggedIn ? (
           <Route
             path="*"
-            element={<LoginPage onLogin={handleLogin} onBackToMain={handleBackToMain} />}
+            element={
+              <LoginPage
+                onLogin={handleLogin}
+                onBackToMain={handleBackToMain}
+              />
+            }
           />
         ) : (
           <Route
@@ -96,7 +108,10 @@ const App = () => {
                     setIsSideBarOpen={setIsSideBarOpen}
                   />
                   {selectedTodo.id !== "" ? (
-                    <TodoList selectedTodo={selectedTodo} saveLists={saveLists} />
+                    <TodoList
+                      selectedTodo={selectedTodo}
+                      saveLists={saveLists}
+                    />
                   ) : (
                     <CreateList onCreate={handleCreateList} />
                   )}
