@@ -10,10 +10,11 @@ const LoginPage = ({
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate(); // Use navigate for routing
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Add your backend authentication logic here
+    
     if (email === "test@example.com" && password === "password") {
       console.log("Login successful!");
       onLogin(); // Notify App of successful login
@@ -75,6 +76,18 @@ const LoginPage = ({
         }}
       >
         Return to Main Page
+      </button>
+      <button
+        onClick={() => navigate("/register")}
+        style={{
+          padding: "10px",
+          background: "#28a745",
+          color: "#fff",
+          border: "none",
+          marginTop: "10px",
+        }}
+      >
+        Register
       </button>
     </div>
   );

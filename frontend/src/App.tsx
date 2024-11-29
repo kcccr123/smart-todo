@@ -8,7 +8,10 @@ import TodoList from "./TodoList";
 import { lightModeTheme } from "./theme";
 import { UserTodoList } from "./TodoList/types";
 import CreateList from "./CreateList";
-import LoginPage from "./LoginPage";
+import LoginPage from "./LoginPage"; 
+import RegisterPage from "./RegisterPage";
+
+
 
 const App = () => {
   const [isSidebarOpen, setIsSideBarOpen] = useState(false);
@@ -30,6 +33,7 @@ const App = () => {
   });
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showMainPage, setShowMainPage] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -47,23 +51,28 @@ const App = () => {
 
   const handleLogin = () => {
     setIsLoggedIn(true);
-    navigate("/app"); // Navigate to the main app after login
+    setShowMainPage(false);
+    navigate("/app");
   };
 
   const handleBackToMain = () => {
-    setIsLoggedIn(true);
-    navigate("/app"); // Navigate to the main app directly
+    setShowMainPage(true);
+    setIsLoggedIn(false);
+    navigate("/app");
   };
 
   return (
     <ThemeProvider theme={lightModeTheme}>
       <CssBaseline />
       <Routes>
-        {!isLoggedIn ? (
-          <Route
-            path="*"
-            element={<LoginPage onLogin={handleLogin} onBackToMain={handleBackToMain} />}
-          />
+        {!isLoggedIn && !showMainPage ? (
+          <>
+            <Route
+              path="/"
+              element={<LoginPage onLogin={handleLogin} onBackToMain={handleBackToMain} />}
+            />
+            <Route path="/register" element={<RegisterPage />} />
+          </>
         ) : (
           <Route
             path="*"
